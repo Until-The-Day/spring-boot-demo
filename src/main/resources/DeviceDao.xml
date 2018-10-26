@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hachi.modules.reservation.dao.DeviceDao">
+
+    <sql id="tableName">
+        device
+    </sql>
+
+    <sql id="baseField">
+        device_id, createtime, is_del
+    </sql>
+
+    <sql id="baseFieldValue">
+        #{deviceId},#{createTime}, #{isDel}
+    </sql>
+
+    <!-- 配置结果集 -->
+    <resultMap id="baseResultMap" type="com.hachi.modules.reservation.entity.Device" >
+        <result property="id" column="id"/>
+        <result property="deviceId" column="device_id"/>
+        <result property="createTime" column="create_time" />
+        <result property="updateTime" column="update_time" />
+        <result property="isDel" column="is_del" />
+    </resultMap>
+
+    <insert id="save" parameterType="com.hachi.modules.reservation.entity.Device" useGeneratedKeys="true" keyProperty="id">
+        insert into <include refid="tableName" />  (<include refid="baseField" />) values (<include refid="baseFieldValue" />)
+    </insert>
+
+    <update id="update" parameterType="com.hachi.modules.reservation.entity.Device" >
+        update <include refid="tableName" />
+        <set>
+            device_id = #{deviceId},
+            is_del = #{isDel}
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过id获取对象-->
+    <select id="getByDeviceId" resultMap="baseResultMap">
+        select * from <include refid="tableName" /> where device_id = #{value}
+    </select>
+
+</mapper>
