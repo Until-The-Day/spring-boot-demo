@@ -2,7 +2,7 @@ package com.lh.models.sys.entity;
 
 import java.util.Date;
 
-public class User {
+public class SysUser {
     private Long id;
 
     private String userName;
