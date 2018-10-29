@@ -17,6 +17,11 @@ public class UserController {
     @Autowired
     private UserDao userDao;
 
+    @GetMapping
+    public String getUsers() {
+        return "Hello Spring Security";
+    }
+
     @GetMapping("getUser")
     public Map<String, Object> getUser() {
         Map<String, Object> map = new HashMap<>();
